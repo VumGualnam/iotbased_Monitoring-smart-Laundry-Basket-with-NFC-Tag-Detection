@@ -160,7 +160,15 @@ void  initializeWifiSetup() {
       request->send(SPIFFS, "/index.html", "text/html", false, processor);
     });
 
-    // Route to set ESP32 to sleep and when tag is detected, woke up
+     // volatile bool performMeasurement = true; //for force start up
+
+     //Route force start hypersonic sensor
+    // server.on("/on", HTTP_GET, [](AsyncWebServerRequest *request) {
+    // performMeasurement = true;  // force start hypersonic sensor
+    // request->send(SPIFFS, "/index.html", "text/html", false, processor);
+    // });
+
+    // Route to set ESP32 to deep sleep and woke up when tag is detected
     // server.on("/off", HTTP_GET, [](AsyncWebServerRequest *request) {
     //     request->send(200, "text/plain", "Going to sleep...");
     //     delay(100);  // Allow time for response to be sent
@@ -548,9 +556,20 @@ void loop() {
     Serial.print("\ndistance: ");
     Serial.println(measureDistance());
 
-
+    // force distance check
+    // if (performMeasurement) {
+    // Serial.print("\ndistance: ");
+    // Serial.println(measureDistance());
+    // delay(100);
+    // }
     
     delay(1000);
+
+    if (performMeasurement) {
+    Serial.print("\ndistance: ");
+    Serial.println(measureDistance());
+    delay(1000);
+    }
     
     
     // Reset the loop if no new card present on the sensor/reader. This saves the entire process when idle.
