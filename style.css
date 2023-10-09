@@ -1,0 +1,307 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  display: inline-block;
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: white;
+}
+
+p {
+  font-size: 1.4rem;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #0a1128;
+  position: relative;
+}
+
+.topnav h1 {
+  display: inline-block;
+}
+
+.topnav span {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: lightgray;
+}
+
+body {
+  margin: 0;
+}
+
+.content {
+  padding: 5%;
+}
+
+.card-grid {
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+  gap: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.card-grid1 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+  gap: 10px;
+  max-width: 800px;
+  margin: 20px auto 0 auto;
+}
+
+.card {
+  flex-grow: 1;
+  height: 270px;
+  background-color: white;
+  box-shadow: 2px 2px 12px 1px rgba(140, 140, 140, 0.5);
+}
+
+.card-wifi {
+  flex-grow: 1;
+  height: 410px;
+  background-color: white;
+  box-shadow: 2px 2px 12px 1px rgba(140, 140, 140, 0.5);
+}
+
+.card-list {
+  flex-grow: 1;
+  height: 550px;
+  background-color: white;
+  box-shadow: 2px 2px 12px 1px rgba(140, 140, 140, 0.5);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #034078;
+}
+
+input[type="submit"] {
+  border: none;
+  color: #fefcfb;
+  background-color: #034078;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 100px;
+  margin-right: 10px;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+}
+
+input[type="submit"]:hover {
+  background-color: #1282a2;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 18px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+label {
+  font-size: 1.2rem;
+}
+.value {
+  font-size: 1.2rem;
+  color: #1282a2;
+}
+.state {
+  font-size: 1.2rem;
+  color: #1282a2;
+}
+
+button {
+  border: none;
+  color: #fefcfb;
+  padding: 15px 32px;
+  margin-top: 40px;
+  text-align: center;
+  font-size: 16px;
+  width: 100px;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+}
+.button-on {
+  background-color: #034078;
+}
+.button-on:hover {
+  background-color: #1282a2;
+}
+.button-off {
+  background-color: #858585;
+}
+.button-off:hover {
+  background-color: #252524;
+}
+
+.nav-button {
+  padding: 10px 20px;
+  margin: 10px;
+  background: (#034078, #1282a2);
+  color: #fefcfb;
+  border: none;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+  text-decoration: none;
+}
+
+.nav-button:hover {
+  background: (#1282a2, #034078);
+}
+
+.email-card {
+  height: 150px;
+  margin: 20px;
+  padding: 20px;
+}
+
+.temp-card {
+  width: 30px;
+  background-color: white;
+  box-shadow: 2px 2px 12px 1px rgba(140, 140, 140, 0.5);
+  position: relative;
+}
+
+.basektstate {
+  width: 30px;
+  background-color: white;
+  box-shadow: 2px 2px 12px 1px rgba(140, 140, 140, 0.5);
+  position: relative;
+}
+
+#colorbar {
+  width: 25px;
+  height: 200px;
+}
+
+#basket {
+  width: auto;
+  height: 200px;
+}
+
+@keyframes volumeAnimation {
+  0% {
+    bottom: 50%;
+    transform: translateY(50%) rotate(90deg);
+  }
+  100% {
+    bottom: 10px;
+  }
+}
+#triangle {
+  width: 10px;
+  height: auto;
+  transform: rotate(90deg);
+  position: absolute;
+  bottom: 10px;
+  transform: translateY(45%) rotate(90deg);
+  animation: volumeAnimation 0.7s ease-in-out;
+}
+
+#basketFill {
+  position: absolute;
+  bottom: 8%;
+  left: 33%;
+  right: 58%;
+  height: 0%; /* Initial height */
+  background-color: black;
+  transition: height 0.5s ease-out; /* Smooth animation */
+  clip-path: polygon(5% 0%, 100% 2%, 93% 100%, 10% 100%);
+}
+
+#capacity {
+  width: 10px;
+  height: auto;
+  transform: rotate(90deg);
+  position: absolute;
+  bottom: 10px;
+}
+
+.messageBox {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 20px;
+  height: 140px;
+  overflow: auto;
+  background-color: #f9f9f9;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #0a1128;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a,
+.sidenav h1 {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #1282a2;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+body.nav-open {
+  margin-left: 250px;
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  height: 100%;
+}
+
+.list table {
+  width: 80%; /* 调整为您想要的宽度 */
+  border-collapse: separate;
+  border-spacing: 3px;
+}
+.list th,
+.list td {
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  text-align: left;
+  background-color: #fff; /* 这是单元格的背景色，用于确保间隔颜色 */
+}
+
+.list th {
+  background-color: #f2f2f2;
+}
