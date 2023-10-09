@@ -160,6 +160,15 @@ void  initializeWifiSetup() {
       request->send(SPIFFS, "/index.html", "text/html", false, processor);
     });
 
+    // Route to set ESP32 to sleep and when tag is detected, woke up
+    // server.on("/off", HTTP_GET, [](AsyncWebServerRequest *request) {
+    //     request->send(200, "text/plain", "Going to sleep...");
+    //     delay(100);  // Allow time for response to be sent
+    //     esp_sleep_enable_ext0_wakeup((gpio_num_t)RST_PIN, 1);  // 1 = HIGH
+    //     esp_deep_sleep_start();
+    // });
+
+     
     // Route to set GPIO state to LOW
     server.on("/off", HTTP_GET, [](AsyncWebServerRequest *request) {
       digitalWrite(ledPin, LOW);
