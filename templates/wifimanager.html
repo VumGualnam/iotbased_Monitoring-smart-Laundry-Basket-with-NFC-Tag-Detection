@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wi-Fi Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+  <body>
+    <div class="topnav">
+      <h1>Wi-Fi Manager</h1>
+      <span style="font-size: 30px; cursor: pointer" onclick="openNav()"
+        >&#9776;</span
+      >
+    </div>
+    <div class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+        >&times;</a
+      >
+      <a class="nav-button" href="index.html"> Home</a>
+      <a class="nav-button" href="user-email.html">User Email</a>
+      <a class="nav-button" href="wifimanager.html">Connection</a>
+      <a class="nav-button" href="content.html">Clothes</a>
+    </div>
+    <div class="content">
+      <div class="card-grid">
+        <div class="card-wifi">
+          <form action="/" method="POST">
+            <p>
+              <label for="ssid">SSID</label>
+              <input type="text" id="ssid" name="ssid" /><br />
+              <label for="pass">Password</label>
+              <input type="text" id="pass" name="pass" /><br />
+              <label for="ip">IP Address</label>
+              <input
+                type="text"
+                id="ip"
+                name="ip"
+                value="192.168.1.200"
+              /><br />
+              <label for="gateway">Gateway Address</label>
+              <input
+                type="text"
+                id="gateway"
+                name="gateway"
+                value="192.168.1.1"
+              /><br />
+              <input type="submit" value="Submit" />
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="js/nav.js"></script>
+  </body>
+</html>
