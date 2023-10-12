@@ -177,6 +177,13 @@ button {
   background-color: white;
   box-shadow: 2px 2px 12px 1px rgba(140, 140, 140, 0.5);
   position: relative;
+  
+  /* margin: 3rem;  */
+  font-size: 2rem;
+  font-weight: bold;
+  color: #034078;
+  z-index: -30;
+  text-align: center;
 }
 
 .basektstate {
@@ -214,6 +221,10 @@ button {
   transform: translateY(45%) rotate(90deg);
   animation: volumeAnimation 0.7s ease-in-out;
 }
+/* 
+#basket {
+  background: linear-gradient( 180deg, white, red);
+} */
 
 #basketFill {
   position: absolute;
@@ -304,4 +315,25 @@ body.nav-open {
 
 .list th {
   background-color: #f2f2f2;
+}
+
+
+/* .temperature-text {
+  /* font-size: 20px;
+  padding-left: 20px;
+  padding-top: 20%;
+  float: left; */
+  /* z-index: -20; */
+/* }  */
+
+figcaption {
+  position: absolute;
+  width: 200px;
+  line-height: 150px;
+  text-align: center;
+  left: 0;
+  font-size: 1.25rem;
+  top: 0;
+  text-shadow: 0 0 1px white;
+  font-weight:bold;
 }

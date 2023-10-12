@@ -11,8 +11,16 @@
       integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
       crossorigin="anonymous"
     />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
+    <div id="hidden-fields">
+      <input type="hidden" id="distance_val" name="distance_val" value="{{distance_val}}">
+      <input type="hidden" id="defaultBasketLength" name="defaultBasketLength" value="{{defaultBasketLength}}">
+
+      <input type="hidden" id="temperature_val" name="temperature_val" value="{{temperature_val}}">
+    </div>
     <div class="topnav">
       <h1>HOME</h1>
       <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
@@ -31,8 +39,11 @@
             <i class="fas fa-leaf"></i> Suggested Temprature
           </p>
           <img src="static/images/colorbar.png" alt="Color Bar" id="colorbar" />
+          <figcaption id="temperature-text">Cold</figcaption>
           <img src="static/images/triangle.png" alt="Triangle Marker" id="triangle" />
         </div>
+          
+        <!-- </div> -->
         <div class="card">
           <p class="card-title">
             <i class="fas fa-lightbulb"></i> Manual Start up
@@ -44,25 +55,72 @@
         </div>
       </div>
       <div class="card-grid1">
-        <div class="card basketstate">
+        <div  id="card-grid1" class="card basketstate">
           <p class="card-title">
             <i class="fas fa-circle-half-stroke fa-rotate-270"></i> Capacity
           </p>
-		  <input type="hidden" id="sensorValue" name="sensorValue" value="{{value}}">
-          <img src="static/images/basket.png" alt="basket" id="basket" />
-		  <div> {{ value }} </div>
-          <div id="basketFill"></div>
+		      
+
+            <img src="static/images/basket.png" alt="basket" id="basket" />
+
+          <!-- <div id="basketFill" ></div> -->
         </div>
         <div class="card alert">
           <p class="card-title">
             <i class="fas fa-bell"></i> Notifications
           </p>
-        <div id="messageBox" class = "messageBox"></div>
+        <div id="messageBox" class = "messageBox">
+          <p>
+            <i id="fas-notification" ></i> 
+            <span id="notification"></span>
+          </p>
+          <!-- <p>
+            <i class="fas fa-exclamation-triangle" style="color: #f00524;">
+            </i>  <span style="color: red;" id="red-notification"></span>
+          </p>
+          <p>
+            <i class="fas fa-check-circle" style="color: green"></i>
+            </i>  <span style="color: green;" id="green-notification"></span>
+          </p> -->
+        </div>
         </div>
         </div>
       </div>
     </div>
+    <div class="container">
+      <div id="first" class="first"> </div>
+    </div>
     <script src="static/js/script.js"></script>
     <script src="static/js/nav.js"></script>
   </body>
+
+<script>
+$(document).ready(function() {
+  BasketFillByData(document.getElementById("distance_val").value);
+  // sendEmail("Tesssst email");
+  getRecommendedTemp();
+  // moveTriangleByData(document.getElementById("temperature_val").value);
+  // BasketFillByData(document.getElementById("distance_val").value);
+  // fetchDistanceValue();
+  // setInterval(fetchDistanceValue, 2000); // 2000 is 20 sec
+});
+
+// $.ajax({
+//   type: "POST",
+//   url: "/get_distance_val",
+//   // success: function(result) {
+//     // console.log(result)
+//     // numRows.innerHTML = result.rows; 
+//   // } 
+// });
+
+// $.ajax({
+//   type: "POST",
+//   url: "/get_temp_val",
+//   success: function(ajax_response) {
+//     console.log("recommended_temp: ", ajax_response);
+//     moveTriangleByData(ajax_response);
+//   } 
+// });
+</script>
 </html>
