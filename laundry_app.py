@@ -69,15 +69,17 @@ def sendEmail():
 
 #     return jsonify({"message": "Data updated successfully!"})
 
+
+
 @app.route('/sensor', methods=['POST'])
 def sensor_endpoint():
     # Directly read the raw data from the request
     sensor_value_text = request.data.decode('utf-8')
     
     # Print the received value
-    print(f"Received sensor value: {sensor_value_text}")
+    print(f"Received sensor value: {sensor_value_text, type(sensor_value_text)}")
 
-    if int(sensor_value_text) > default_basket_height or int(sensor_value_text) <= 0:
+    if math.ceil(float(sensor_value_text)) > default_basket_height or math.ceil(float(sensor_value_text)) <= 0:
         return jsonify({"message": "Error sensor reading! Database is NOT updated!"})
     
     # If you also want to use it as a float for further processing, you can convert it:
@@ -87,37 +89,36 @@ def sensor_endpoint():
         return "not float"
     
     with sqlite3.connect('washing_db_corrected.sqlite') as conn:
+        # print("type(sensor_value): ", type(sensor_value))
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO "DistanceState" (distance) VALUES (?)', (sensor_value,))
+        cursor.execute('''INSERT INTO DistanceState (distance) VALUES (?);''', (sensor_value,))
         conn.commit()
 
-        rows_affected = cursor.rowcount
-        print(f"Rows affected by update: {rows_affected}")
+    rows_affected = cursor.rowcount
+    print(f"Rows affected by update: {rows_affected}")
         
     if rows_affected == 0:  
         return jsonify({"error": f"error nothing happened"}), 400
     
     print("message: Sensor Reading Data updated successfully!")
-    return redirect(url_for('home', distance=math.ceil(sensor_value))) 
-    # return jsonify({"message": "Sensor Reading Data updated successfully!"})
-
+    # return redirect(url_for('home', distance=math.ceil(float(sensor_value)))) 
+    return jsonify({"message": "Sensor Reading Data updated successfully!"})
 
 @app.route('/rfid', methods=['POST'])
 def rfid_endpoint():
     data = request.json
-    # print(data)
+    print(data)
     tag_id = data['tag_id']
-    cloth_type = data['tag_info'].split(",")[0]
-    cloth_color = data['tag_info'].split(",")[1]
+    cloth_type = data['tag_content'].split("-")[1]
+    cloth_color = data['tag_content'].split("-")[2]
     # print(cloth_type, cloth_color)
     distance = 0 # can discuss later
     
     with sqlite3.connect('washing_db_corrected.sqlite') as conn:
         cursor = conn.cursor()
         
-        cursor.execute('INSERT INTO "TempInput" \
-                       (tag, cloth_type, distance, cloth_color) VALUES (?,?,?,?)', 
-                       (tag_id, cloth_type, distance, cloth_color))
+        cursor.execute('''INSERT INTO TempInput (tag, cloth_type, distance, cloth_color) VALUES (?,?,?,?)''', 
+                       (tag_id, cloth_type.capitalize(), distance, cloth_color.capitalize()))
         conn.commit()
 
         rows_affected = cursor.rowcount
@@ -188,6 +189,8 @@ def display_clothes():
         clothe_types = dict([(i[0], i[1]) for i in clothe_types])
         temp = dict(get_table_from_db("Temperature") ) # dict(conn.execute('SELECT * FROM Temperature').fetchall())
 
+
+        print("clothes: ", clothes)
         list_to_display = []
 
         for cloth in clothes:
@@ -241,4 +244,6 @@ def home(distance=None):
 if __name__ == "__main__":
     # app.run(host='0.0.0.0', port=5003)
     # app.run(host='localhost', port=5003, debug=True)
-	app.run(host='localhost', port=5003, debug=True, threaded=True)
+	# app.run(host='localhost', port=5003, debug=True, threaded=True)
+    app.run(host='192.168.1.101', port=5003, debug=True, threaded=True)
+    # app.run(host='0.0.0.0', port=5003, debug=True, threaded=True)
