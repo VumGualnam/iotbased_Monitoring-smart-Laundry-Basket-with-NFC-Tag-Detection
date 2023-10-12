@@ -1,12 +1,12 @@
 ///////////////////// start: functions /////////////////////////
-function moveTriangleByData(dataValue) {
+function setRecommendedTemp(recommended_temp) {
   const triangle = document.getElementById("triangle");
   // const temp_card = document.getElementsByClassName("temp_card");
   let positions = [15, 60, 106, 200]; // pixel as unit
   let text_indicators = ["Cold", "Cold/Warm", "Warm", "Do not wash"]
 
   // console.log("triangle:datavalue: ", dataValue);
-  let positionIndex = dataValue; //change this value to 0, 1, 2, or 3 to see the movement of the triangle
+  let positionIndex = recommended_temp; //change this value to 0, 1, 2, or 3 to see the movement of the triangle
   // if (dataValue <= 33) {
   //   positionIndex = 0;
   // } else if (dataValue <= 66) {
@@ -98,14 +98,16 @@ function fetchDistanceValue() {
 
 
 function sendEmail(message){
+  email_msg = JSON.stringify({"message": message})
   $.ajax({
     type: "POST",
     url: "/sendEmail",
-    data: JSON.stringify({"message": message}),
+    data: email_msg,
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function(sendEmail_response) {
       console.log("sendEmail_response: ", sendEmail_response);
+      console.log("Sent email: ", email_msg);
     }, 
     failure: function(errMsg) {
       alert(errMsg);
@@ -117,17 +119,31 @@ function sendEmail(message){
 }
 
 function getRecommendedTemp(){
-  recommended_temp = 0;
+  var recommended_temp;
   $.ajax({
     type: "POST",
     url: "/get_temp_val",
+    async: false, // this is required to return response data outside ajax call
     success: function(ajax_response) {
+
+      //########## start: To be used only for Testing ########################
+      // recommended_temp = 2 // test for "Reminder! ..." email
+      // recommended_temp = 3 // test for "Oops! ..." email
+      //########## end: To be used only for Testing ########################
+
       recommended_temp = ajax_response;
-      console.log("recommended_temp: ", ajax_response);
-      moveTriangleByData(ajax_response);
+      console.log("getRecommendedTemp::ajax_response: ", recommended_temp);
+      setRecommendedTemp(recommended_temp); 
     } 
   });
-  console.log("recommended_temp.......", recommended_temp)
+  
+  // console.log("getRecommendedTemp::recommended_temp: ", recommended_temp)
+  return parseInt(recommended_temp,10); // return in decimal number
+}
+
+function isBasketFull(){
+  // return boolean
+  return document.getElementById("distance_val").value > document.getElementById("defaultBasketLength").value  - 5;
 }
 
 ///////////////////// end: functions /////////////////////////

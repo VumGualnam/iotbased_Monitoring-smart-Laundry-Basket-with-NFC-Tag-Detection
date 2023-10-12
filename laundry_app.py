@@ -44,6 +44,7 @@ def sendEmail():
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, message)
     print("message : Email sent successfully!")
+    print("Sent email : ", message)
     return jsonify({"message": "Email sent successfully!"})
 
 # @app.route('/data', methods=['POST'])
@@ -128,13 +129,6 @@ def rfid_endpoint():
     # For now, just return a stubbed response
     return jsonify({"message": "RFID data processed!"})
 
-def differentiate_clothes(tag_info):
-    # Placeholder function for processing RFID tag information
-    pass
-
-def insert_into_db(table_name):
-    col_name, values = table_name
-
 def get_table_from_db(table_names, colnames=None):
     """
     Returns all rows from a table as a list of lists
@@ -180,7 +174,7 @@ def get_temperature_val():
     recommended_temp = [sub for sub in recommended_temp if not all(ele == None for ele in sub)]
     recommended_temp = str(max(recommended_temp)[0])
     recommended_temp = recommended_temp if  recommended_temp is not None else default_recommend_temp
-    print("recommended_temp: ", recommended_temp)
+    print("recommended_temp: ", recommended_temp, type(recommended_temp))
     return recommended_temp
 
 @app.route('/content.html')
@@ -232,7 +226,15 @@ def home(distance=None):
     if int(distance) <= 0.15 * default_basket_height:
         distance = 0.15 * default_basket_height
     return render_template('index.html', 
-                           distance_val=distance, 
+                          
+                          ########## start: To be used only for Testing ########################
+                           #uncomment below line for testing "Oops! ..." email and "Reminder! ..." email
+                        #    distance_val = 72, 
+                           #for testing "Reminder! ..." email: set distance_val= 72 
+                           # and set recommended_temp = 2 in script.js file 
+                           ########## end: To be used only for Testing ########################
+
+                           distance_val= distance, 
                            defaultBasketLength=default_basket_height
                            )
 

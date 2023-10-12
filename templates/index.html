@@ -46,10 +46,11 @@
         <!-- </div> -->
         <div class="card">
           <p class="card-title">
+            <!-- This title might be for Manual reset after doing laundry -->
             <i class="fas fa-lightbulb"></i> Manual Start up
           </p>
           <p>
-            <a href="on"><button class="button-on">ON</button></a>
+            <a href="on"><button class="button-on">ON</button></a> <!-- This should probably be used for deleting 'Clothes' table -->
             <a href="off"><button class="button-off">OFF</button></a>
           </p>
         </div>
@@ -97,9 +98,17 @@
 <script>
 $(document).ready(function() {
   BasketFillByData(document.getElementById("distance_val").value);
-  // sendEmail("Tesssst email");
-  getRecommendedTemp();
-  // moveTriangleByData(document.getElementById("temperature_val").value);
+
+  if (isBasketFull() && getRecommendedTemp() == parseInt(3,10)) {
+    sendEmail("Oops! Your laundry basket is full but there is color mixing problem. Please check your clothes again before washing.");
+  }
+  // else if (getRecommendedTemp() == 3) {
+  //   sendEmail("Color mixing problem in the basket. Please check your clothes again.");
+  // }
+   else if (isBasketFull()) {
+    sendEmail("Reminder! Your laundry basket is full.");
+  }
+  // setRecommendedTemp(document.getElementById("temperature_val").value);
   // BasketFillByData(document.getElementById("distance_val").value);
   // fetchDistanceValue();
   // setInterval(fetchDistanceValue, 2000); // 2000 is 20 sec
@@ -119,7 +128,7 @@ $(document).ready(function() {
 //   url: "/get_temp_val",
 //   success: function(ajax_response) {
 //     console.log("recommended_temp: ", ajax_response);
-//     moveTriangleByData(ajax_response);
+//     setRecommendedTemp(ajax_response);
 //   } 
 // });
 </script>
