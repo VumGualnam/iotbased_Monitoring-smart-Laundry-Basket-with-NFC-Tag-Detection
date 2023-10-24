@@ -49,6 +49,8 @@ cd into ***laundry_app.py*** directory, then
 ```
 $ python laundry_app.py
 ```
+### Viewing The App
+Go to http://127.0.0.1:5003
 
 ### Authors
 FirstName_Initial Surname_Initial Email
